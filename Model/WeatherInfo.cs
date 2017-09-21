@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreIHostedService.Model
 {
-
-
-
-
+    //Metadata class auto generated from JSON Api
     public class WeatherInfo
     {
         public Coord coord { get; set; }
@@ -30,8 +27,6 @@ namespace AspNetCoreIHostedService.Model
         public double lon { get; set; }
         public double lat { get; set; }
     }
-
-
     public class Weather
     {
         public int id { get; set; }
@@ -48,18 +43,15 @@ namespace AspNetCoreIHostedService.Model
         public double temp_min { get; set; }
         public double temp_max { get; set; }
     }
-
     public class Wind
     {
         public double speed { get; set; }
         public int deg { get; set; }
     }
-
     public class Clouds
     {
         public int all { get; set; }
     }
-
     public class Sys
     {
         public int type { get; set; }
