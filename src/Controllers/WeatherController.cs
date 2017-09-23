@@ -23,7 +23,8 @@ namespace AspNetCoreIHostedService.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_weatherDbContext.WeatherData.ToList());
+            return Ok(_weatherDbContext.WeatherData
+                .OrderByDescending(d => d.Id).ToList());
         }
     }
 }

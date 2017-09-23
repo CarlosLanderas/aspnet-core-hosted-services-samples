@@ -7,6 +7,7 @@ namespace AspNetCoreIHostedService.Model
 {
     public class WeatherData
     {
+        public int Id { get; set; }
         public string CityName { get; set; }
         public double Lon { get; set;  }
         public double Lat { get; set; }

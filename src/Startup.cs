@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreIHostedService.Infrastructure;
 using AspNetCoreIHostedService.Infrastructure.HostedServices;
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,12 +28,20 @@ namespace AspNetCoreIHostedService
             var serviceScopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
             
             services.AddSingleton<IHostedService>(sp => new WeatherHostedService(serviceScopeFactory));
+
+            services.AddHangfire(config =>
+            {
+                config.UseMemoryStorage();
+            });
+
             services.AddMvc();
         }
 
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
             app.UseMvc();
         }
     }

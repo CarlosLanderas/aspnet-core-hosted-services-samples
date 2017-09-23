@@ -33,8 +33,6 @@ namespace AspNetCoreIHostedService.Infrastructure.HostedServices
                 {
                     weatherContext = scope.ServiceProvider.GetService<WeatherDbContext>();
 
-                    ClearDatabase();
-
                     ICollection<Task<WeatherData>> cityTasks = new List<Task<WeatherData>>();
                     foreach (var city in cities)
                     {

@@ -11,10 +11,9 @@ using System;
 namespace AspNetCoreIHostedService.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20170921093444_Initial")]
-    partial class Initial
+    partial class WeatherDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,24 +22,35 @@ namespace AspNetCoreIHostedService.Migrations
 
             modelBuilder.Entity("AspNetCoreIHostedService.Model.WeatherData", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("CityName")
-                        .ValueGeneratedOnAdd();
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<int>("Humidity");
+
+                    b.Property<DateTime>("LastUpdated");
 
                     b.Property<double>("Lat");
 
                     b.Property<double>("Lon");
 
-                    b.Property<string>("MainWeather");
+                    b.Property<string>("MainWeather")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<int>("Pressure");
 
                     b.Property<double>("Temperature");
 
-                    b.Property<string>("WeatherDescription");
+                    b.Property<string>("WeatherDescription")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.HasKey("CityName");
+                    b.HasKey("Id");
 
                     b.ToTable("WeatherData");
                 });
