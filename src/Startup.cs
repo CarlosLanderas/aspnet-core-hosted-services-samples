@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreIHostedService.Infrastructure;
+using AspNetCoreIHostedService.Infrastructure.Authorization;
 using AspNetCoreIHostedService.Infrastructure.HostedServices;
 using Hangfire;
 using Hangfire.MemoryStorage;
@@ -21,12 +22,12 @@ namespace AspNetCoreIHostedService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddDbContext<WeatherDbContext>();
 
             var serviceProvider = services.BuildServiceProvider();
             var serviceScopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
-            
+
             services.AddSingleton<IHostedService>(sp => new WeatherHostedService(serviceScopeFactory));
 
             services.AddHangfire(config =>
@@ -37,11 +38,14 @@ namespace AspNetCoreIHostedService
             services.AddMvc();
         }
 
-        
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseHangfireServer();
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard(options: new DashboardOptions()
+            {
+                Authorization = new[] { new DashboardAuthentication() }
+            });
             app.UseMvc();
         }
     }
