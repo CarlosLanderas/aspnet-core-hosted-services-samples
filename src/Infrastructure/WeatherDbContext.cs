@@ -17,8 +17,7 @@ namespace AspNetCoreIHostedService.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                // "Server=.;Database=WeatherService;Trusted_Connection=True; MultipleActiveResultSets=True");
-                "Server = tcp:dnmalaga.database.windows.net, 1433; Initial Catalog = dnmalaga; Persist Security Info = False; User ID = dnmalaga; Password = Espeto2017; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+                "Server=.;Database=WeatherService;Trusted_Connection=True; MultipleActiveResultSets=True");
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreIHostedService.Infrastructure;
 using AspNetCoreIHostedService.Infrastructure.Authorization;
+using AspNetCoreIHostedService.Infrastructure.BackgroundTasks;
 using AspNetCoreIHostedService.Infrastructure.HostedServices;
 using Hangfire;
 using Hangfire.MemoryStorage;
@@ -46,6 +47,9 @@ namespace AspNetCoreIHostedService
             {
                 Authorization = new[] { new DashboardAuthentication() }
             });
+
+            BackgroundJob.Enqueue<WeatherDataProcessor>(p => p.Execute());
+
             app.UseMvc();
         }
     }
