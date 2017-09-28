@@ -14,7 +14,8 @@ namespace AspNetCoreIHostedService.Model
         public string MainWeather { get; set; }
         public string WeatherDescription { get; set; }
         public double Temperature { get; set; }
-        public int Humidity { get; set; }
-        public int Pressure { get; set; }
+        public double Humidity { get; set; }
+        public double Pressure { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

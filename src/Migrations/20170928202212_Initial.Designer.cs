@@ -11,8 +11,8 @@ using System;
 namespace AspNetCoreIHostedService.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20170923231853_initial")]
-    partial class initial
+    [Migration("20170928202212_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,29 @@ namespace AspNetCoreIHostedService.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("AspNetCoreIHostedService.Model.MaxMeasure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<double>("Humidity");
+
+                    b.Property<DateTime>("MeasureTime");
+
+                    b.Property<double>("Pressure");
+
+                    b.Property<double>("Temperature");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaxMeasures");
+                });
 
             modelBuilder.Entity("AspNetCoreIHostedService.Model.WeatherData", b =>
                 {
@@ -31,7 +54,9 @@ namespace AspNetCoreIHostedService.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("Humidity");
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<double>("Humidity");
 
                     b.Property<DateTime>("LastUpdated");
 
@@ -43,7 +68,7 @@ namespace AspNetCoreIHostedService.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("Pressure");
+                    b.Property<double>("Pressure");
 
                     b.Property<double>("Temperature");
 

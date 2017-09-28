@@ -8,22 +8,28 @@ using AspNetCoreIHostedService.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreIHostedService.Infrastructure.HostedServices
 {
     public class WeatherHostedService : IHostedService
     {
         private readonly IServiceScopeFactory serviceScopeFactory;
+        private readonly ILogger _iLogger;
+        private readonly ILogger _unknown;
         private WeatherDbContext weatherContext;
         private const int delayMilliseconds = 15000;
 
-        public WeatherHostedService(IServiceScopeFactory serviceScopeFactory)
+        public WeatherHostedService(IServiceScopeFactory serviceScopeFactory, ILogger<WeatherHostedService> iLogger)
         {
             this.serviceScopeFactory = serviceScopeFactory;
+            _iLogger = iLogger;
         }
         private readonly HashSet<string> cities = new HashSet<string>()
         {
-            "Madrid", "London", "Dubai", "New York", "Vancouver", "Seattle"
+            "Madrid", "London", "Dubai",
+            "New York", "Vancouver","Seattle",
+            "Oregon","Galicia", "Miami", "Berlin"
         };
         public async Task StartAsync(CancellationToken cancellationToken)
         {
@@ -45,15 +51,11 @@ namespace AspNetCoreIHostedService.Infrastructure.HostedServices
                         weatherContext.WeatherData.Add(cityWeatherData);
                     }
 
-                    await weatherContext.SaveChangesAsync();
-                    await Task.Delay(delayMilliseconds);
+                    await weatherContext.SaveChangesAsync(cancellationToken);
+                    _iLogger.LogInformation($"Downloaded weather data for cities ${string.Join(",", cities)} ");
+                    await Task.Delay(delayMilliseconds,cancellationToken);
                 }
             }
-        }
-
-        private void ClearDatabase()
-        {
-            weatherContext.Database.ExecuteSqlCommand("delete from WeatherData");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

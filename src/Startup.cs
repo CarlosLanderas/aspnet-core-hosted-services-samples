@@ -29,7 +29,7 @@ namespace AspNetCoreIHostedService
             var serviceProvider = services.BuildServiceProvider();
             var serviceScopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
 
-            services.AddSingleton<IHostedService>(sp => new WeatherHostedService(serviceScopeFactory));
+            services.AddSingleton<IHostedService, WeatherHostedService>();
 
             services.AddHangfire(config =>
             {
@@ -48,7 +48,7 @@ namespace AspNetCoreIHostedService
                 Authorization = new[] { new DashboardAuthentication() }
             });
 
-            BackgroundJob.Enqueue<WeatherDataProcessor>(p => p.Execute());
+            RecurringJob.AddOrUpdate<WeatherDataProcessor>(w => w.Execute(), "0/15 * * * *");
 
             app.UseMvc();
         }

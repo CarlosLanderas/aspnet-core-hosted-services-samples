@@ -10,8 +10,11 @@ namespace AspNetCoreIHostedService.Infrastructure.Authorization
     {
         public bool Authorize(DashboardContext context)
         {
-            var httpContext = context.GetHttpContext();
-            return httpContext.User.Identity.IsAuthenticated;
+            return true;
+
+            //Filters are useful to check if user is authenticated, claims, etc
+            //var httpContext = context.GetHttpContext();
+            //return httpContext.User.Identity.IsAuthenticated;
         }
     }
 }

@@ -21,10 +21,11 @@ namespace AspNetCoreIHostedService.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(_weatherDbContext.WeatherData
-                .OrderByDescending(d => d.Id).ToList());
+            var weatherData = await _weatherDbContext.WeatherData.
+                OrderByDescending(w => w.Id).ToListAsync();
+            return Ok(weatherData);
         }
     }
 }

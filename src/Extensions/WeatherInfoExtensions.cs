@@ -19,7 +19,8 @@ namespace AspNetCoreIHostedService.Extensions
                 Lat = weatherInfo.coord.lat,
                 Lon = weatherInfo.coord.lon,
                 MainWeather = weatherInfo.weather.First().main,
-                WeatherDescription = weatherInfo.weather.First().description
+                WeatherDescription = weatherInfo.weather.First().description,
+                CreatedAt = DateTime.Now
             };
         }
     }
