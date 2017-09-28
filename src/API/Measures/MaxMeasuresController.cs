@@ -24,7 +24,6 @@ namespace AspNetCoreIHostedService.API.Measures
             var maxTemp = await _weatherContext.MaxMeasures
                 .OrderByDescending(m => m.Temperature).Take(5).ToListAsync();
             return Ok(maxTemp);
-            ;
         }
 
         [HttpGet, Route("pressure")]
@@ -33,7 +32,6 @@ namespace AspNetCoreIHostedService.API.Measures
             var maxTemp = await _weatherContext.MaxMeasures
                 .OrderByDescending(m => m.Temperature).Take(5).ToListAsync();
             return Ok(maxTemp);
-
         }
 
         [HttpGet, Route("humidity")]

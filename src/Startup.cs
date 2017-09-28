@@ -49,7 +49,6 @@ namespace AspNetCoreIHostedService
             });
 
             RecurringJob.AddOrUpdate<WeatherDataProcessor>(w => w.Execute(), Cron.Minutely);
-
             app.UseMvc();
         }
     }
