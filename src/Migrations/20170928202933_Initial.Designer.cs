@@ -11,7 +11,7 @@ using System;
 namespace AspNetCoreIHostedService.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20170928202212_Initial")]
+    [Migration("20170928202933_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,8 @@ namespace AspNetCoreIHostedService.Migrations
                         .HasMaxLength(50);
 
                     b.Property<double>("Humidity");
+
+                    b.Property<DateTime>("LastUpdated");
 
                     b.Property<DateTime>("MeasureTime");
 

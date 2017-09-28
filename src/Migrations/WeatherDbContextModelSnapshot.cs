@@ -32,6 +32,8 @@ namespace AspNetCoreIHostedService.Migrations
 
                     b.Property<double>("Humidity");
 
+                    b.Property<DateTime>("LastUpdated");
+
                     b.Property<DateTime>("MeasureTime");
 
                     b.Property<double>("Pressure");

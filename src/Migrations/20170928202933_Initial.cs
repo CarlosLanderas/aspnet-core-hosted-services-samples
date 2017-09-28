@@ -17,6 +17,7 @@ namespace AspNetCoreIHostedService.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CityName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Humidity = table.Column<double>(type: "float", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MeasureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Pressure = table.Column<double>(type: "float", nullable: false),
                     Temperature = table.Column<double>(type: "float", nullable: false)

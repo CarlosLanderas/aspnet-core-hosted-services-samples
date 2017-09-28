@@ -64,6 +64,7 @@ namespace AspNetCoreIHostedService.Infrastructure
             maxMeasure.Property(m => m.Humidity).IsRequired();
             maxMeasure.Property(m => m.Pressure).IsRequired();
             maxMeasure.Property(m => m.Temperature).IsRequired();
+            maxMeasure.Property<DateTime>("LastUpdated").IsRequired();
         }
     }
 }

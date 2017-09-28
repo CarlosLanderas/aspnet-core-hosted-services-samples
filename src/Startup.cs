@@ -48,7 +48,7 @@ namespace AspNetCoreIHostedService
                 Authorization = new[] { new DashboardAuthentication() }
             });
 
-            RecurringJob.AddOrUpdate<WeatherDataProcessor>(w => w.Execute(), "0/15 * * * *");
+            RecurringJob.AddOrUpdate<WeatherDataProcessor>(w => w.Execute(), Cron.Minutely);
 
             app.UseMvc();
         }
