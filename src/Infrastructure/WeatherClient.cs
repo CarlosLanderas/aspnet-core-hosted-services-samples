@@ -14,7 +14,6 @@ namespace AspNetCoreIHostedService.Infrastructure
         private const string WeatherAPIUrl = "http://api.openweathermap.org/data/2.5/weather?q=#city#&appid=c281433c547be5d11a0b8fcdb0702277";
         
         public async Task<WeatherData> GetCity(string city)
-
         {
             using (var client = new HttpClient())
             {

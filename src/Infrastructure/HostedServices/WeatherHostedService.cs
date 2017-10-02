@@ -16,7 +16,6 @@ namespace AspNetCoreIHostedService.Infrastructure.HostedServices
     {
         private readonly IServiceScopeFactory serviceScopeFactory;
         private readonly ILogger _iLogger;
-        private readonly ILogger _unknown;
         private WeatherDbContext weatherContext;
         private const int delayMilliseconds = 15000;
 
